@@ -7,7 +7,7 @@ public class SistCad extends JFrame {
     
  
     public static void main(String[] args) {
-      FormUsuario app = new FormUsuario();
+      FormInicial app = new FormInicial();
       app.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
     

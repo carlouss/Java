@@ -8,29 +8,31 @@ import java.text.ParseException;
 import javax.swing.JFrame;
 import javax.swing.text.MaskFormatter;
 
-public class FormUsuario extends JFrame implements ActionListener {
+public class FormCliente extends JFrame implements ActionListener {
     
-    JLabel          lblTitulo   =new JLabel ("Cadastro de Usuário"),
+    JLabel          lblTitulo   =new JLabel ("Cadastro de Cliente"),
                     lblNome     =new JLabel ("Nome:"),
-                    lblCPF      =new JLabel ("CPF:"),   
+                    lblCPF      =new JLabel ("CPF:"),
                     lblRG       =new JLabel ("R.G:"),
-                    lblLogin    =new JLabel ("Login:"),
-                    lblSenha    =new JLabel ("Senha:"),
+                    lblCEP      =new JLabel ("CEP:"),
+                    lblEndereco =new JLabel ("Endereço:"),
+                    lblNumero   =new JLabel ("Nº:"),
                     lblTelefone =new JLabel ("Telefone:"),
                     lblEmail    =new JLabel ("Email:");
     
     JTextField      txfNome     =new JTextField(),
+                    txfNumero   =new JTextField(),
                     txfEmail    =new JTextField(),
-                    txfLogin    =new JTextField(),
-                    txfSenha    =new JTextField();
+                    txfEndereco =new JTextField();
     
     MaskFormatter   maskCpf,
                     maskRg,
+                    maskCep,
                     maskTelefone;
     
     JButton         btnEnviar,
-                    btnSair,
-                    btnDescartar;
+                    btnDescartar,
+                    btnSair;
     
     ImageIcon       Sair,
                     Enviar,
@@ -38,37 +40,40 @@ public class FormUsuario extends JFrame implements ActionListener {
     
     JFormattedTextField ftxfCpf,
                         ftxfRg,
+                        ftxfCep,
                         ftxfTelefone;
     
     //Events
     @Override
     public void actionPerformed(ActionEvent e){
         if(e.getSource()==btnSair){
-        FormUsuario.this.dispose();
+        FormCliente.this.dispose();
         }
         if(e.getSource()==btnEnviar){
             String a = txfNome.getText();
             String b = ftxfRg.getText();
             String c = ftxfCpf.getText();
             String d = ftxfTelefone.getText();
-            String i = txfLogin.getText();
+            String i = ftxfCep.getText();
             String f = txfEmail.getText();
-            String g = txfSenha.getText();
+            String g = txfEndereco.getText();
+            String h = txfNumero.getText();
             
-            JOptionPane.showMessageDialog(this,"Usuário cadastrado no SistCad! \n\n"+" Nome: "+a+"\n RG: "+b+"\n CPF: "+c+"\n E-mail: "+f+"\n Telefone: "+d+"\n Login: "+i+"\n Senha: "+g+"\n","Usuário cadastrado",1);
+            JOptionPane.showMessageDialog(null,"Cliente cadastrado no SistCad! \n\n"+" Nome: "+a+"\n RG: "+b+"\n CPF: "+c+"\n E-mail: "+f+"\n Telefone: "+d+"\n Endereço: "+g+"\n Nº "+h+"\n CEP: "+i+"\n","Cliente cadastrado",1);
         }
         if(e.getSource()==btnDescartar){
             txfNome     .setText("");
-            ftxfRg      .setText("");
+            txfNumero   .setText("");
             txfEmail    .setText("");
+            txfEndereco .setText("");
             ftxfCpf     .setText("");
-            txfLogin    .setText("");
-            txfSenha    .setText("");
+            ftxfRg      .setText("");
+            ftxfCep     .setText("");
             ftxfTelefone.setText("");
-            
         }
-    }
-public FormUsuario(){
+        }
+    
+public FormCliente(){
     super ("SistCad");
     Container telaCliente = getContentPane();
     setLayout(null);
@@ -91,35 +96,38 @@ public FormUsuario(){
     try{
     maskCpf         =new MaskFormatter("###.###.###-##");
     maskRg          =new MaskFormatter("##.###.###-#");
+    maskCep         =new MaskFormatter("#####-###");
     maskTelefone    =new MaskFormatter("(##)#####-####");
     
     maskCpf         .setPlaceholderCharacter('_');
     maskRg          .setPlaceholderCharacter('_');
+    maskCep         .setPlaceholderCharacter('_');
     maskTelefone    .setPlaceholderCharacter('_');
     }
     catch(ParseException excp){}
     ftxfCpf         =new JFormattedTextField(maskCpf);
     ftxfRg          =new JFormattedTextField(maskRg);
+    ftxfCep         =new JFormattedTextField(maskCep);
     ftxfTelefone    =new JFormattedTextField(maskTelefone);
-    
-    txfSenha=new JPasswordField();//PW
     
     //btn Positions
     lblTitulo   .setBounds(gW*9,    gH,    wWidth+(gW*4), btnH*2);
     lblNome     .setBounds(gW*5,    gH*9,  wWidth,        btnH);
     txfNome     .setBounds(gW*10,   gH*9,  wWidth+30,     btnH);
     lblCPF      .setBounds(gW*6+3,  gH*13, wWidth,        btnH);
-    ftxfCpf     .setBounds(gW*10,   gH*13, wWidth-120,    btnH);
+    ftxfCpf     .setBounds(gW*10,   gH*13, wWidth-124,    btnH);
     lblRG       .setBounds(gW*24,   gH*13, wWidth,        btnH);
     ftxfRg      .setBounds(gW*27,   gH*13, wWidth-137,    btnH);
-    lblTelefone .setBounds(gW*2+8,  gH*17, wWidth,        btnH);
-    ftxfTelefone.setBounds(gW*10,   gH*17, wWidth-120,    btnH);
-    lblEmail    .setBounds(gW*5+2,  gH*21, wWidth,        btnH);
-    txfEmail    .setBounds(gW*10,   gH*21, wWidth-60,     btnH);
-    lblLogin    .setBounds(gW*5+2,  gH*25, wWidth,        btnH);
-    txfLogin    .setBounds(gW*10,   gH*25, wWidth-130,    btnH);
-    lblSenha    .setBounds(gW*5-3,  gH*29, wWidth,        btnH);
-    txfSenha    .setBounds(gW*10,   gH*29, wWidth-130,    btnH);
+    lblCEP      .setBounds(gW*5+10, gH*17, wWidth,        btnH);
+    ftxfCep     .setBounds(gW*10,   gH*17, wWidth-149,    btnH);
+    lblNumero   .setBounds(gW*24,   gH*17, wWidth,        btnH);
+    txfNumero   .setBounds(gW*27,   gH*17, wWidth-185,    btnH);
+    lblEndereco .setBounds(gW*2+3,  gH*21, wWidth,        btnH);
+    txfEndereco .setBounds(gW*10,   gH*21, wWidth+30,     btnH);
+    lblTelefone .setBounds(gW*2+8,  gH*25, wWidth,        btnH);
+    ftxfTelefone.setBounds(gW*10,   gH*25, wWidth-120,    btnH);
+    lblEmail    .setBounds(gW*5+2,  gH*29, wWidth,        btnH);
+    txfEmail    .setBounds(gW*10,   gH*29, wWidth-60,     btnH);
     btnEnviar   .setBounds(gW*4,   gH*35, btnW*3,         btnH*3);
     btnDescartar.setBounds(gW*19,   gH*35, btnW*3,        btnH*3);
     btnSair     .setBounds(gW*34,   gH*35, btnW*3,        btnH*3);
@@ -128,12 +136,13 @@ public FormUsuario(){
     telaCliente     .add(lblTitulo);
     telaCliente     .add(lblCPF);       telaCliente     .add(ftxfCpf);
     telaCliente     .add(lblRG);        telaCliente     .add(ftxfRg);
-    telaCliente     .add(lblLogin);     telaCliente     .add(txfLogin);
+    telaCliente     .add(lblCEP);       telaCliente     .add(ftxfCep);
     telaCliente     .add(lblTelefone);  telaCliente     .add(ftxfTelefone);
     telaCliente     .add(lblNome);      telaCliente     .add(txfNome);
-    telaCliente     .add(lblSenha);     telaCliente     .add(txfSenha);
+    telaCliente     .add(lblEndereco);  telaCliente     .add(txfEndereco);
+    telaCliente     .add(lblNumero);    telaCliente     .add(txfNumero);
     telaCliente     .add(lblEmail);     telaCliente     .add(txfEmail);
-    telaCliente     .add(btnEnviar);    telaCliente     .add(btnSair);telaCliente     .add(btnDescartar);
+    telaCliente     .add(btnEnviar);    telaCliente     .add(btnSair);     telaCliente     .add(btnDescartar);
     
     //Buttons Events
     btnSair.addActionListener(this);
@@ -141,7 +150,7 @@ public FormUsuario(){
     btnDescartar.addActionListener(this);
     
     //lbl/txf Styles
-      Color	ColorsItems = new Color(46,61,78),
+    Color	ColorsItems = new Color(46,61,78),
                 ColorBg     = new Color(99,134,169),
                 Colortxb    = new Color(78,108,138);
     
@@ -152,17 +161,21 @@ public FormUsuario(){
     lblNome     .setForeground(ColorsItems);
     lblCPF      .setForeground(ColorsItems);
     lblRG       .setForeground(ColorsItems);
-    lblLogin    .setForeground(ColorsItems);
-    lblSenha    .setForeground(ColorsItems);
+    lblCEP      .setForeground(ColorsItems);
+    lblEndereco .setForeground(ColorsItems);
+    lblNumero   .setForeground(ColorsItems);
     lblTelefone .setForeground(ColorsItems);
     lblEmail    .setForeground(ColorsItems);
     txfNome     .setForeground(ColorsItems);
+    txfNumero   .setForeground(ColorsItems);
     txfEmail    .setForeground(ColorsItems);
-    txfSenha    .setForeground(ColorsItems);
+    txfEndereco .setForeground(ColorsItems);
     ftxfCpf     .setForeground(ColorsItems);
     ftxfRg      .setForeground(ColorsItems);
-    txfLogin    .setForeground(ColorsItems);
+    ftxfCep     .setForeground(ColorsItems);
     ftxfTelefone.setForeground(ColorsItems);
+    
+    
     
     btnSair     .setBackground(null);
     btnEnviar   .setBackground(null);
@@ -173,26 +186,28 @@ public FormUsuario(){
     btnDescartar.setBorder(null);
     
     txfNome     .setBorder(null);
+    txfNumero   .setBorder(null);
     txfEmail    .setBorder(null);
-    txfSenha    .setBorder(null);
+    txfEndereco .setBorder(null);
     ftxfCpf     .setBorder(null);
     ftxfRg      .setBorder(null);
-    txfLogin    .setBorder(null);
+    ftxfCep     .setBorder(null);
     ftxfTelefone.setBorder(null);
     
-    
-    telaCliente .setBackground(ColorBg);
     txfNome     .setBackground(Colortxb);
+    txfNumero   .setBackground(Colortxb);
     txfEmail    .setBackground(Colortxb);
-    txfSenha    .setBackground(Colortxb);
+    txfEndereco .setBackground(Colortxb);
     ftxfCpf     .setBackground(Colortxb);
     ftxfRg      .setBackground(Colortxb);
-    txfLogin    .setBackground(Colortxb);
+    ftxfCep     .setBackground(Colortxb);
     ftxfTelefone.setBackground(Colortxb);
-    
+            
+    telaCliente .setBackground(ColorBg);
     
     setVisible(true);
     setSize(400,400);
     setLocationRelativeTo(null);
+
 }    
 }
